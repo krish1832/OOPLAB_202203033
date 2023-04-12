@@ -15,13 +15,13 @@ public class Main {
                 size++;
             }
         }
-//        adding node at first
+        //        adding node at first
         public  void addfirst(int data){
             Node newNode=new Node(data);
             newNode.next=head;
             head=newNode;
         }
-//        adding node at last
+        //        adding node at last
         public void addLast(int data) {
             Node currNode = head;
             Node newNode = new Node(data);
@@ -30,7 +30,7 @@ public class Main {
             }
             currNode.next = newNode;}
 
-//        adding element at given Index
+        //        adding element at given Index
         public void addAtIndex(int indx,int data){
             Node currNode=head;
             Node newNode=new Node(data);
@@ -61,7 +61,7 @@ public class Main {
             }
             System.out.println("null");
         }
-//delete first Node
+        //delete first Node
         public void deleteFirst(){
             if(head == null){
                 System.out.println("The list is empty");
@@ -93,49 +93,35 @@ public class Main {
 
         public void deletatindex(int indx){
             if(indx==1) {
-                deleteFirst();
+                head=head.next;
                 return ;
             }
             Node curr=head;
             int i=1;
-            while(i<indx-1 && curr!=null){
-               curr=curr.next;
-               i++;
+            while(i<indx-1) {
+                curr = curr.next;
+                i++;
             }
-            if(curr==null) return;
-            Node prev=curr.next;
-            if(prev==null) {
-                deleteLast();
-                return;
-            }
-            if(prev.next==null){
-               curr.next=null;
-               return;
-            }
-            else {
-                Node next=prev.next;
-                curr.next=next;
-                size--;
-            }
-
+            curr.next=curr.next.next;
+size--;
         }
 
-        }
-        public static void main(String[]args){
+    }
+    public static void main(String[]args){
         ll list=new ll();
         list.addfirst(30);
         list.addfirst(20);
         list.addfirst(10);
         list.print();
         System.out.println("adding 0 at 3rd position");
-         list.addAtIndex(3,0);
-         list.print();
-            System.out.print("Size Is:");
-            System.out.println(list.getsize());
-            System.out.println("Deleting 3rd node");
-            list.deletatindex(3);
-            list.print();
-            System.out.println("Size is :"+list.getsize());
+        list.addAtIndex(3,0);
+        list.print();
+        System.out.print("Size Is:");
+        System.out.println(list.getsize());
+        System.out.println("Deleting 3rd node");
+        list.deletatindex(4);
+        list.print();
+        System.out.println("Size is :"+list.getsize());
     }
 
 }
