@@ -1,10 +1,14 @@
+import java.util.Random;
 public class Main {
-    static class ll{
+
+    static class ll {
         Node head;
         int size;
-        ll(){
-            this.size=0;
+
+        ll() {
+            this.size = 0;
         }
+
         class Node {
             int data;
             Node next;
@@ -15,75 +19,56 @@ public class Main {
                 size++;
             }
         }
-        //        adding node at first
-        public  void addfirst(int data){
-            Node newNode=new Node(data);
-            newNode.next=head;
-            head=newNode;
-        }
-        //        adding node at last
-        public void addLast(int data) {
-            Node currNode = head;
-            Node newNode = new Node(data);
-            while (currNode.next != null) {
-                currNode = currNode.next;
-            }
-            currNode.next = newNode;}
 
-        //        adding element at given Index
-        public void addAtIndex(int indx,int data){
-            Node currNode=head;
-            Node newNode=new Node(data);
-            if(indx==1){
-                addfirst(data);
-                return;
-            }
-            int i=1;
-            while(i<indx-1&&currNode!=null){
-                currNode=currNode.next;
-                i++;
-            }
-            newNode.next=currNode.next;
-            currNode.next=newNode;
-
-        }
-        // to get size of ll
-        public int getsize(){
-            return size;
-        }
-
-        // print list
-        public void print(){
-            Node currNode=head;
-            while(currNode!=null){
-                System.out.print(currNode.data+"-->");
-                currNode=currNode.next;
-            }
-            System.out.println("null");
-        }
-        //delete first Node
-        public void deleteFirst(){
-            if(head == null){
+        public void deleteFirst() {
+            if (head == null) {
                 System.out.println("The list is empty");
                 return;
             }
             size--;
             head = head.next;
         }
-        //delete Last Node of ll
-        public void deleteLast(){
-            if(head == null){
+
+        public void addLast(int data) {
+            Node newNode = new Node(data);
+            if (head == null) {
+                head = newNode;
+                return;
+            }
+            Node currNode = head;
+            while (currNode.next != null) {
+                currNode = currNode.next;
+            }
+            currNode.next = newNode;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public int getElement(int indx) {
+            int i = 1;
+            Node curr = head;
+            while (i < indx) {
+                curr = curr.next;
+                i++;
+            }
+            return curr.data;
+        }
+
+        public void deleteLast() {
+            if (head == null) {
                 System.out.println("The list is empty");
                 return;
             }
             size--;
-            if(head.next == null){
+            if (head.next == null) {
                 head = null;
                 return;
             }
             Node secondLast = head;
             Node lastNode = head.next;
-            while(lastNode.next != null){
+            while (lastNode.next != null) {
                 lastNode = lastNode.next;
                 secondLast = secondLast.next;
 
@@ -91,37 +76,48 @@ public class Main {
             secondLast.next = null;
         }
 
-        public void deletatindex(int indx){
-            if(indx==1) {
-                head=head.next;
-                return ;
+        public void deleteatindex(int indx) {
+            if (indx == 1) {
+                head = head.next;
+                return;
             }
-            Node curr=head;
-            int i=1;
-            while(i<indx-1) {
+            Node curr = head;
+            int i = 1;
+            while (i < indx - 1) {
                 curr = curr.next;
                 i++;
             }
-            curr.next=curr.next.next;
-size--;
+            curr.next = curr.next.next;
+            size--;
         }
 
-    }
-    public static void main(String[]args){
-        ll list=new ll();
-        list.addfirst(30);
-        list.addfirst(20);
-        list.addfirst(10);
-        list.print();
-        System.out.println("adding 0 at 3rd position");
-        list.addAtIndex(3,0);
-        list.print();
-        System.out.print("Size Is:");
-        System.out.println(list.getsize());
-        System.out.println("Deleting 3rd node");
-        list.deletatindex(4);
-        list.print();
-        System.out.println("Size is :"+list.getsize());
+
+
+
+    public void print() {
+        Node currNode = head;
+        while (currNode != null) {
+            System.out.print(currNode.data + "-->");
+            currNode = currNode.next;
+        }
+        System.out.println("null");
     }
 
+}
+    public static void main(String[] args) {
+        ll list=new ll();
+        for(int i=0;i<10;i++){
+            Random random = new Random();
+            int randomNumber = random.nextInt(50) + 1;
+            list.addLast(randomNumber);
+        }
+        list.print();
+        for(int i=0;i<list.getSize();i++){
+            if(list.getElement(i)>25) {
+                list.deleteatindex(i);
+            }
+        }
+        list.print();
+
+    }
 }
